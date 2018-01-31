@@ -11,4 +11,4 @@ RUN pip3 install Cython nose pytest
 
 RUN cd scikit-learn && pip3 install -e .
 
-RUN pytest sklearn
+RUN cd scikit-learn && pytest sklearn

@@ -16,10 +16,8 @@ RUN conda create -n sklearn-env numpy scipy cython pytest nose docutils python=3
 RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 
 
-RUN conda activate sklearn-env && \
+RUN source activate sklearn-env && \
     git clone https://github.com/scikit-learn/scikit-learn.git && \
-    cd scikit-learn && git checkout master
+    cd scikit-learn && git checkout master && pip install -e .
 
-RUN make
-
-RUN pytest sklearn
+RUN source activate sklearn-env && cd scikit-learn && pytest sklearn
